@@ -4,9 +4,14 @@ local const = require("src/const")
 local gui = require("src/gui").new()
 
 local screenW, screenH
-local fontLessons
+local fontLessons, basicOptions
+local lessonsLayout = {}
+local SUBJECTS = {
+    LANGUAGE = "Language",
+    MATHS = "Mathematics",
+    OFFICE_AUTO = "Office Automation"
+}
 
-local languageLesson
 
 local function init()
 
@@ -19,6 +24,16 @@ local function load()
     screenH = const.SCREEN.HEIGHT
 
     fontLessons = love.graphics.newFont(16)
+
+    lessonsLayout.y = screenH * 0.2
+    lessonsLayout.cellW = screenW * 0.25
+    lessonsLayout.cellH = screenH * 0.04
+    lessonsLayout.pady = screenH * 0.02
+    lessonsLayout.padx = (screenW - lessonsLayout.cellW * 3) * 0.25 -- 1/4 because with 3 subjects, we have 4 gaps between layouts
+    lessonsLayout.x = {}
+    for n = 1, 3 do
+        lessonsLayout.x[n] = lessonsLayout.padx * n + lessonsLayout.cellW * (n-1)
+    end
 
 end
 
@@ -59,7 +74,20 @@ end
 
 local function updateGui()
 
-    gui.layout:reset()
+    gui.layout:reset(lessonsLayout.x[1], lessonsLayout.y, lessonsLayout.padx, lessonsLayout.pady)
+    gui:Label("Language", {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
+    if gui:Button("Human Body - Head", {font = fontLessons, align = "center"}, gui.layout:row()).hit then
+        print("LEZGO")
+    end
+    gui:Button("Human Body - Body", {font = fontLessons, align = "center"}, gui.layout:row())
+
+    gui.layout:reset(lessonsLayout.x[2], lessonsLayout.y, lessonsLayout.padx, lessonsLayout.pady)
+    gui:Label("Mathematics", {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
+    gui:Button("Calculation", {font = fontLessons, align = "center"}, gui.layout:row())
+
+    gui.layout:reset(lessonsLayout.x[3], lessonsLayout.y, lessonsLayout.padx, lessonsLayout.pady)
+    gui:Label("Office Automation", {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
+    gui:Button("Which software ?", {font = fontLessons, align = "center"}, gui.layout:row())
 
 end
 
@@ -73,7 +101,7 @@ end
 
 local function draw()
 
-    love.graphics.printf("Select a lesson below", fontLessons, 0, screenH * 0.05, const.SCREEN.WIDTH, "center")
+    love.graphics.printf("Select a lesson below", fontLessons, 0, screenH * 0.08, const.SCREEN.WIDTH, "center")
 
     gui:draw()
 

@@ -1,3 +1,5 @@
+love.graphics.setDefaultFilter("nearest", "nearest")
+
 require "src/appState"
 
 local const = require "src/const"

@@ -4,6 +4,7 @@ local APPSTATES = {
     [const.APPSTATES.SPLASH] = require "src/splash/splash",
     [const.APPSTATES.MAIN_MENU] = require "src/menu/mainMenu",
     [const.APPSTATES.LESSON_MENU] = require "src/menu/lessonMenu",
+    [const.APPSTATES.LESSONS] = require "src/lessons/lessons",
     [const.APPSTATES.EDITOR] = require "src/editor/editor"
 }
 
