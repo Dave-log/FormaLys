@@ -6,11 +6,6 @@ local gui = require("src/gui").new()
 local screenW, screenH
 local fontLessons, basicOptions
 local lessonsLayout = {}
-local SUBJECTS = {
-    LANGUAGE = "Language",
-    MATHS = "Mathematics",
-    OFFICE_AUTO = "Office Automation"
-}
 
 
 local function init()
@@ -71,23 +66,27 @@ local function keypressed(key)
 
 end
 
+local text = {"bla", "blabla", "blablabla", "blablablabla"}
 
 local function updateGui()
 
     gui.layout:reset(lessonsLayout.x[1], lessonsLayout.y, lessonsLayout.padx, lessonsLayout.pady)
-    gui:Label("Language", {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
+    gui:Label(const.SUBJECTS.LANGUAGE, {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
     if gui:Button("Human Body - Head", {font = fontLessons, align = "center"}, gui.layout:row()).hit then
         print("LEZGO")
     end
     gui:Button("Human Body - Body", {font = fontLessons, align = "center"}, gui.layout:row())
 
     gui.layout:reset(lessonsLayout.x[2], lessonsLayout.y, lessonsLayout.padx, lessonsLayout.pady)
-    gui:Label("Mathematics", {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
+    gui:Label(const.SUBJECTS.MATHS, {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
     gui:Button("Calculation", {font = fontLessons, align = "center"}, gui.layout:row())
 
     gui.layout:reset(lessonsLayout.x[3], lessonsLayout.y, lessonsLayout.padx, lessonsLayout.pady)
-    gui:Label("Office Automation", {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
+    gui:Label(const.SUBJECTS.OFFICE_AUTO, {font = fontLessons, align = "center"}, gui.layout:row(lessonsLayout.cellW, lessonsLayout.cellH))
     gui:Button("Which software ?", {font = fontLessons, align = "center"}, gui.layout:row())
+    for i = 1 , 4 do
+        gui:Button(text[i], {font = fontLessons, align = "center"}, gui.layout:row())
+    end
 
 end
 

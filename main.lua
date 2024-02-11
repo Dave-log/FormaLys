@@ -1,6 +1,6 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 
-require "src/appState"
+local appState = require "src/appState"
 
 local const = require "src/const"
 
@@ -14,8 +14,8 @@ end
 
 function love.textedited(text, start, length)
 
-    if _currentAppState.textedited then
-        _currentAppState.textedited(text, start, length)
+    if appState.currentState.textedited then
+        appState.currentState.textedited(text, start, length)
     end
 
 end
@@ -23,8 +23,8 @@ end
 
 function love.textinput(t)
 
-    if _currentAppState.textinput then
-        _currentAppState.textinput(t)
+    if appState.currentState.textinput then
+        appState.currentState.textinput(t)
     end
 
 end
@@ -32,8 +32,8 @@ end
 
 function love.keypressed(key)
 
-    if _currentAppState.keypressed then
-        _currentAppState.keypressed(key)
+    if appState.currentState.keypressed then
+        appState.currentState.keypressed(key)
     end
 
 end
@@ -41,8 +41,8 @@ end
 
 function love.update(dt)
 
-    if _currentAppState.update then
-        _currentAppState.update(dt)
+    if appState.currentState.update then
+        appState.currentState.update(dt)
     end
 
 end
@@ -50,8 +50,8 @@ end
 
 function love.draw()
 
-    if _currentAppState.draw then
-        _currentAppState.draw()
+    if appState.currentState.draw then
+        appState.currentState.draw()
     end
 
 end

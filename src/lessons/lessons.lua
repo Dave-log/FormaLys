@@ -1,5 +1,0 @@
-local lessons = {}
-
-
-
-return lessons

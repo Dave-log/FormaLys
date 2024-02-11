@@ -1,28 +1,37 @@
+local appState = {}
+
 local const = require("src/const")
 
 local APPSTATES = {
     [const.APPSTATES.SPLASH] = require "src/splash/splash",
     [const.APPSTATES.MAIN_MENU] = require "src/menu/mainMenu",
     [const.APPSTATES.LESSON_MENU] = require "src/menu/lessonMenu",
-    [const.APPSTATES.LESSONS] = require "src/lessons/lessons",
+    [const.APPSTATES.LESSONS] = require "src/lessons/lessonManager",
     [const.APPSTATES.EDITOR] = require "src/editor/editor"
 }
 
+appState.oldState = nil
+appState.currentState = nil
+
+
 function ChangeAppState(pAppState)
 
-    _oldAppState = _currentAppState
-    _currentAppState = APPSTATES[pAppState]
+    appState.oldState = appState.currentState
+    appState.currentState = APPSTATES[pAppState]
 
-    if _currentAppState.init then
-        _currentAppState.init();
+    if appState.currentState.init then
+        appState.currentState.init()
     end
 
-    if _currentAppState.load then
-        _currentAppState.load();
+    if appState.currentState.load then
+        appState.currentState.load()
     end
 
-    if _oldAppState and _currentAppState.unload then
-        _oldAppState.unload();
+    if appState.oldState and appState.currentState.unload then
+        appState.oldState.unload()
     end
 
 end
+
+
+return appState
