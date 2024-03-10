@@ -1,9 +1,19 @@
 local lessonManager = {}
 
-lessonManager.lessonList = {}
+local const = require "src/const"
+local lessonFactory = require "src/lessons/lessonFactory"
+
+lessonManager.lessonList = {
+        [const.LESSONTYPES.BLANK_TEXT] = {},
+        [const.LESSONTYPES.CALCULATIONS] = {},
+        [const.LESSONTYPES.CAPTIONS] = {},
+        [const.LESSONTYPES.MCQ] = {}
+}
 
 
 local function new(pType)
+
+        table.insert(lessonManager.lessonList[pType], lessonFactory.newLesson(pType))
 
 end
 
